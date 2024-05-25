@@ -1,0 +1,31 @@
+function doGet() {
+  return HtmlService.createHtmlOutput(`
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <base target="_top">
+        <script>
+          function sendInput() {
+            var userInput = document.getElementById("userInput").value;
+            google.script.run.withSuccessHandler(displayResponse).getResponse(userInput);
+          }
+
+          function displayResponse(response) {
+            document.getElementById("response").innerText = response;
+          }
+        </script>
+      </head>
+      <body>
+        <h1>Chatbot</h1>
+        <p>Talk to me and I'll guess if you are human or AI!</p>
+        <input type="text" id="userInput" placeholder="Type something...">
+        <button onclick="sendInput()">Send</button>
+        <p id="response"></p>
+      </body>
+    </html>
+  `);
+}
+
+function getResponse(input) {
+  return "I think you are AI.";
+}
